@@ -10,6 +10,49 @@
 
   gtag('config', 'G-CCKFJSB83G');
 </script>
+<style>
+       /* body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }*/
+        #slideshowContainer {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        #slideshow {
+            display: flex;
+            animation: fadeInOut 3s infinite;
+        }
+        .slide {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            transition: opacity 1s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
     <title>Padidala Ramya - Bootstrap Resume/CV</title>
     
     <!-- Meta -->
@@ -55,7 +98,7 @@
 								    <li class="mb-2"><a class="text-link" href='mailto:padidara@mail.uc.edu'><i class="far fa-envelope fa-fw me-2" data-fa-transform="grow-3"></i>padidara@mail.uc.edu</a></li>
 								    <!-- //<a href='mailto:padidara"+"@"+"mail.uc.edu'>padidara"+"@"+"mail.uc.edu</a>" -->
 								    <li><a class="text-link" href="#"><i class="fas fa-mobile-alt fa-fw me-2" data-fa-transform="grow-6"></i>(+1) 513-544-1096</a></li>
-								    <li><a href="https://padidara.github.io/waph.html">Web Application Programming and Hacking</a></li>
+								    <li><a href="https://padidara.github.io/waph.html" target="_blank">Web Application Programming and Hacking</a></li>
 							    </ul>
 						    </div><!--//primary-info-->
 						    <div class="secondary-info col-auto mt-2">
@@ -440,6 +483,50 @@
     // Call the function to display the welcome message
     displayWelcomeMessage();
 </script>
+
+<!-- Slideshow Container -->
+<div id="slideshowContainer">
+    <div id="slideshow"></div>
+</div>
+
+<script>
+    // Function to fetch a random image from Unsplash API
+    function fetchRandomImage() {
+        return fetch('https://source.unsplash.com/random')
+            .then(response => response.url)
+            .catch(error => console.error('Error fetching random image:', error));
+    }
+
+    // Function to create a new slide with a random image
+    async function createSlide() {
+        const slideshow = document.getElementById('slideshow');
+        const imageUrl = await fetchRandomImage();
+
+        const slide = document.createElement('div');
+        slide.classList.add('slide');
+        slide.innerHTML = `<img src="${imageUrl}" alt="Random Image">`;
+
+        slideshow.appendChild(slide);
+    }
+
+    // Function to start the slideshow
+    function startSlideshow() {
+        setInterval(() => {
+            createSlide();
+            const slideshow = document.getElementById('slideshow');
+            const slides = document.querySelectorAll('.slide');
+            
+            // Remove the oldest slide to keep the container size consistent
+            if (slides.length > 1) {
+                slides[0].remove();
+            }
+        }, 3000);
+    }
+
+    // Call function to start the slideshow on page load
+    startSlideshow();
+</script>
+
 
 </body>
 
