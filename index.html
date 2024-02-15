@@ -2,13 +2,14 @@
 <html lang="en"> 
 <head>
 	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-CCKFJSB83G"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-CCKFJSB83G');
-	</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CCKFJSB83G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CCKFJSB83G');
+</script>
     <title>Padidala Ramya - Bootstrap Resume/CV</title>
     
     <!-- Meta -->
@@ -41,7 +42,9 @@
 		    <header class="resume-header pt-4 pt-md-0">
 			    <div class="row">
 				    <div class="col-block col-md-auto resume-picture-holder text-center text-md-start">
-					    <img class="picture" src="assets/images/profile.jpg" alt="">	
+						<!--********************************************************************************************************************-->
+				        <img class="picture" src="assets/images/profile.jpg" alt="">
+						
 				    </div><!--//col-->
 				    <div class="col">
 					    <div class="row p-4 justify-content-center justify-content-md-between">
@@ -78,7 +81,8 @@
 						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Work Experience</h2>
 						    <div class="resume-section-content">
 							    <div class="resume-timeline position-relative">
-								    <article class="resume-timeline-item position-relative pb-5">	    
+								    <article class="resume-timeline-item position-relative pb-5">
+									    
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
 										        <h3 class="resume-position-title font-weight-bold mb-1">Backend Developer</h3>
@@ -158,44 +162,46 @@
 
 							    </div><!--//resume-timeline-->    
 							    <!-- Joke Display -->
-							    <div id="jokeApp">
-								    <h2>Joke of the Minute</h2>
-								    <p>{{ currentJoke }}</p>
-							    </div>
-							    <!-- JokeAPI script -->
-							    <script>
-								    new Vue({
-									    el: '#jokeApp',
-									    data: {
-										    currentJoke: ''
-									    },
-									    created: function () {
-										    // Fetch a joke initially
-										    this.fetchJoke();
-										    // Set up interval to fetch a new joke every 1 minute (60000 milliseconds)
-										    setInterval(this.fetchJoke, 60000);
-									    },
-									    methods: {
-										    fetchJoke: function () {
-											    // Make a GET request to the jokeAPI
-											    fetch('https://v2.jokeapi.dev/joke/Any')
-												    .then(response => response.json())
-												    .then(data => {
-													    // Check if the response is a two-part joke or a single joke
-													    if (data.type === 'twopart') {
-														    this.currentJoke = `${data.setup}\n${data.delivery}`;
-													    } else {
-														    this.currentJoke = data.joke;
-													    }
-												    })
-												    .catch(error => {
-													    console.error('Error fetching joke:', error);
-													    this.currentJoke = 'Failed to fetch joke. Please try again later.';
-												    });
-										    }
-									    }
-								    });
-							    </script>
+  <div id="jokeApp">
+    <h2>Joke of the Minute</h2>
+    <p>{{ currentJoke }}</p>
+  </div>
+
+  <!-- JokeAPI script -->
+  <script>
+    new Vue({
+      el: '#jokeApp',
+      data: {
+        currentJoke: ''
+      },
+      created: function () {
+        // Fetch a joke initially
+        this.fetchJoke();
+
+        // Set up interval to fetch a new joke every 1 minute (60000 milliseconds)
+        setInterval(this.fetchJoke, 60000);
+      },
+      methods: {
+        fetchJoke: function () {
+          // Make a GET request to the jokeAPI
+          fetch('https://v2.jokeapi.dev/joke/Any')
+            .then(response => response.json())
+            .then(data => {
+              // Check if the response is a two-part joke or a single joke
+              if (data.type === 'twopart') {
+                this.currentJoke = `${data.setup}\n${data.delivery}`;
+              } else {
+                this.currentJoke = data.joke;
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching joke:', error);
+              this.currentJoke = 'Failed to fetch joke. Please try again later.';
+            });
+        }
+      }
+    });
+  </script>
 						    </div>
 					    </section><!--//experience-section-->
 				    </div>
@@ -342,71 +348,68 @@
 							    </ul>
 						    </div>
 						    <div id="digit-clock">Current time: Tue Jan 30 2024 22:39:22 GMT-0500 (Eastern Standard Time)</div>
-						    <canvas id="analog-clock" width="100" height="100" style="background-color: #999"></canvas>
-						    <script src="https://waph-uc.github.io/clock.js"></script>
-						    <script type="text/javaScript">
-							    function displayTime(){
-								    document.getElementById('digit-clock').innerHTML = "Current time: " + new Date();
-							    }
-							    setInterval(displayTime,500);
-							    //code for adding the analog code which is called by the canvas TASK-1 Part 2-(4)
-							    var canvas= document.getElementById("analog-clock");
-							    var ctx = canvas.getContext("2d");
-							    var radius = canvas.height / 2;
-							    ctx.translate(radius, radius);
-							    radius=radius * 0.90
-								    setInterval(drawClock,1000);
-							    function drawClock(){
-								    drawFace(ctx, radius);
-								    drawNumbers(ctx, radius);
-								    drawTime(ctx,radius);
-							    }
-						    </script>
-						    <hr>
-						    <div id="email" onclick="showhideEmail()">Show my email</div>
-						    <script src="email.js"></script>
-				    </div>
-				    <hr>						    
-				    <!-- Vue.js To-Do List App -->
-				    <div id="app">
-					    <h2>To-Do List</h2>
-					    <input v-model="newTodo" @keyup.enter="addTodo" placeholder="Add a new task">
-					    <ul>
-						    <li v-for="(todo, index) in todos" :key="index">
-							    {{ todo }}
-							    <button @click="removeTodo(index)">Remove</button>
-						    </li>
-					    </ul>
-				    </div>
-				    <!-- Vue.js script -->
-				    <script>
-					    new Vue({
-						    el: '#app',
-						    data: {
-							    newTodo: '',
-							    todos: []
-						    },
-						    methods: {
-							    addTodo: function() {
-								    if (this.newTodo.trim() !== '') {
-									    this.todos.push(this.newTodo.trim());
-									    this.newTodo = '';
-								    }
-							    },
-							    removeTodo: function(index) {
-								    this.todos.splice(index, 1);
-							    }
-						    }
-					    });
-				    </script>
-				    <script>
-					    // Function to set or get the last visit date from cookies
-				<script>
+   <canvas id="analog-clock" width="100" height="100" style="background-color: #999"></canvas>
+   <script src="https://waph-uc.github.io/clock.js"></script>
+
+   <script type="text/javaScript">
+     function displayTime(){
+      document.getElementById('digit-clock').innerHTML = "Current time: " + new Date();
+    }
+    setInterval(displayTime,500);
+
+       //code for adding the analog code which is called by the canvas TASK-1 Part 2-(4)
+    var canvas= document.getElementById("analog-clock");
+    var ctx = canvas.getContext("2d");
+    var radius = canvas.height / 2;
+    ctx.translate(radius, radius);
+    radius=radius * 0.90
+    setInterval(drawClock,1000);
+
+    function drawClock(){
+      drawFace(ctx, radius);
+      drawNumbers(ctx, radius);
+      drawTime(ctx,radius);
+    }
+  </script>
+  <!-- Vue.js To-Do List App -->
+  <div id="app">
+    <h2>To-Do List</h2>
+    <input v-model="newTodo" @keyup.enter="addTodo" placeholder="Add a new task">
+    <ul>
+      <li v-for="(todo, index) in todos" :key="index">
+        {{ todo }}
+        <button @click="removeTodo(index)">Remove</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Vue.js script -->
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        newTodo: '',
+        todos: []
+      },
+      methods: {
+        addTodo: function() {
+          if (this.newTodo.trim() !== '') {
+            this.todos.push(this.newTodo.trim());
+            this.newTodo = '';
+          }
+        },
+        removeTodo: function(index) {
+          this.todos.splice(index, 1);
+        }
+      }
+    });
+  </script>
+  <script>
     // Function to set or get the last visit date from cookies
     function getLastVisitDate() {
         const now = new Date();
         const lastVisit = document.cookie.replace(/(?:(?:^|.*;\s*)lastVisit\s*=\s*([^;]*).*$)|^.*$/, "$1");
-
+        
         if (lastVisit) {
             return new Date(lastVisit);
         } else {
@@ -426,20 +429,36 @@
             alert('Welcome to my homepage!');
         }
     }
+
     // Call the function to display the welcome message
     displayWelcomeMessage();
 </script>
-			    </body>
+
+</body>
+
+
 			    </div><!--//row-->
-					    </section><!--//interests-section-->	    
-		    </div>
-	    </div><!--//resume-body-->		    
-    </div>
-    </article>     
-<!--     <footer class="footer text-center pt-2 pb-5">
+					    </section><!--//interests-section-->
+					     
+
+					    
+				    </div>
+
+
+		    </div><!--//resume-body-->
+		    
+	    </div>
+    </article> 
+
+
+    
+    <!-- <footer class="footer text-center pt-2 pb-5">
 	    <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
         <!-- <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small> -->
     </footer> -->
+
+    
+
 </body>
 </html> 
 
